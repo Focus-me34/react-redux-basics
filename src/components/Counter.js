@@ -12,13 +12,11 @@ const Counter = () => {
   const incrementHandler = () => {
     dispatch(increment());
   };
-  const increaseHandler = () => {
-    dispatch(increase({ value: Number(amount.current.value), type: type.current.value }))
-    amount.current.value = 0
-    type.current.value = "+"
-  };
   const decrementHandler = () => {
     dispatch(decrement());
+  };
+  const increaseHandler = () => {
+    dispatch(increase({ value: Number(amount.current.value), type: type.current.value }))
   };
 
   return (

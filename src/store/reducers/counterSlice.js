@@ -9,18 +9,16 @@ const counterSlice = createSlice({
     increment: (state) => { state.inputValue++ },
     decrement: (state) => { state.inputValue-- },
     increase: (state, action) => {
-      const { value, type } = action.payload
-      // if (type === "+") {
-      //   return  void(state.counter += value)
-      // } else {
-      //   console.log(state.counter)
-      //   return void(state.counter -= value)
-      // };
-      // return (type === "+" ? state.counter.counter += value : state.counter.counter -= value)
-      return (type === "+" ? void (state.inputValue += value) : void (state.inputValue -= value))
+      const {value, type} = action.payload
+       type === "+" ? state.inputValue += value : state.inputValue -= value
+      }
     }
-  }
-})
+  })
 
-export const { increment, increase, decrement } = counterSlice.actions
-export default counterSlice.reducer
+  export const { increment, increase, decrement } = counterSlice.actions
+  export default counterSlice.reducer
+
+  // ! BELOW LINE DIDN'T WORK
+  // return type === "+" ? { state.counter += value } : { state.counter -= value}
+  // * BELOW LINE WORKED
+  // return (type === "+" ? void (state.inputValue += value) : void (state.inputValue -= value))
