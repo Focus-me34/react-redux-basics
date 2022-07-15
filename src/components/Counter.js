@@ -31,7 +31,7 @@ const Counter = () => {
       <button onClick={changeHandler}>Increase by:</button>
       <br />
       <label htmlFor="amount">Amount</label>
-      <input type="number" name="amount" ref={amount} defaultValue="0" />
+      <input type="number" name="amount" ref={amount} defaultValue="5" />
       <label htmlFor="type">Type (+ or -)</label>
       <input type="text" name="type" ref={symbol} defaultValue="+" />
     </main>
