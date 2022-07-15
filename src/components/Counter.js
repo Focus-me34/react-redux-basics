@@ -1,6 +1,6 @@
 import classes from './Counter.module.css';
-import { decrement, increment, increase } from '../store/reducers/counterSlice';
-import { useRef } from 'react';
+import { decrement, increment, change } from '../store/reducers/counterSlice';
+import { useCallback, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 const Counter = () => {
@@ -9,15 +9,18 @@ const Counter = () => {
   const count = useSelector((state) => state.counter.inputValue)
   const dispatch = useDispatch();
 
-  const incrementHandler = () => {
+  // ? Usecallback below saves the functions in the memory so they
+  // ? don't have to be created everytime the component re-renders.
+
+  const incrementHandler = useCallback(() => {
     dispatch(increment());
-  };
-  const decrementHandler = () => {
+  }, []);
+  const decrementHandler = useCallback(() => {
     dispatch(decrement());
-  };
-  const increaseHandler = () => {
-    dispatch(increase({ value: Number(amount.current.value), type: type.current.value }))
-  };
+  }, []);
+  const changeHandler = useCallback(() => {
+    dispatch(change({ value: Number(amount.current.value), type: type.current.value }))
+  }, []);
 
   return (
     <main className={classes.counter}>
@@ -25,11 +28,11 @@ const Counter = () => {
       <div className={classes.value}>-- {count} --</div>
       <button onClick={decrementHandler}>Counter --</button>
       <button onClick={incrementHandler}>Counter ++</button>
-      <button onClick={increaseHandler}>Increase by:</button>
+      <button onClick={changeHandler}>Increase by:</button>
       <br />
       <label htmlFor="amount">Amount</label>
       <input type="number" name="amount" ref={amount} defaultValue="0" />
-      <label htmlFor="type">Type (+ / -)</label>
+      <label htmlFor="type">Type (+ or -)</label>
       <input type="text" name="type" ref={type} defaultValue="+" />
     </main>
   );
