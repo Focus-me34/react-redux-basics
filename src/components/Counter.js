@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 const Counter = () => {
   const amount = useRef()
-  const type = useRef()
+  const symbol = useRef()
   const count = useSelector((state) => state.counter.inputValue)
   const dispatch = useDispatch();
 
@@ -19,7 +19,7 @@ const Counter = () => {
     dispatch(decrement());
   }, []);
   const changeHandler = useCallback(() => {
-    dispatch(change({ value: Number(amount.current.value), type: type.current.value }))
+    dispatch(change({ value: Number(amount.current.value), symbol: symbol.current.value }))
   }, []);
 
   return (
@@ -33,7 +33,7 @@ const Counter = () => {
       <label htmlFor="amount">Amount</label>
       <input type="number" name="amount" ref={amount} defaultValue="0" />
       <label htmlFor="type">Type (+ or -)</label>
-      <input type="text" name="type" ref={type} defaultValue="+" />
+      <input type="text" name="type" ref={symbol} defaultValue="+" />
     </main>
   );
 };
